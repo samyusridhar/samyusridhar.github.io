@@ -235,7 +235,7 @@ I then determined the optimal k by running the model through a range of k values
 
 ![Optimal K](/static/images/my-soundtrack/optimal-k.png)
 
-Finally I ran the model with the optimal k neighbors and predicted the probabilities for the classification (non-favorite and favorite) of each data point in the audio_features_test set.<br>
+Finally I ran the model with the optimal k neighbors and predicted the probabilities for the classification (non-favorite and favorite) of each data point in the audio_features_test set.
 This model scored **96%**.
 
     knneighbors = KNeighborsClassifier(n_neighbors=optimal_k, weights='distance')
