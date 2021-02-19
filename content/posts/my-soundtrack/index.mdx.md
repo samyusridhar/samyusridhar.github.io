@@ -1,5 +1,5 @@
 ---
-title: index.mdx
+title: My Soundtrack
 date: 2021-01-07T05:00:00Z
 tags:
 - Music
