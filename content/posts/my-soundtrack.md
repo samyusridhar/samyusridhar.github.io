@@ -161,7 +161,7 @@ Once these functions were written, the variables I defined earlier could be pass
 
 Once I completed the audio feature retrieval for every track, I concatenated the two dataframes into a larger dataset and removed duplicates. I created a column titled "favorite", and placed 1's next to all of the tracks in my favorites playlist and 0's next to the rest. The total dataset consisted of close to 2,000 observations, with 90 of them being marked as "favorite". Below is a sample of the data:
 
-![Favorites Dataframe](/static/images/my-soundtrack/favorites-dataframe.png)
+![](/uploads/my-soundtrack_favorites-dataframe.png "Favorites Dataframe")
 
 I repeated the process for the "test" data by concatenating the audio features for three separate playlists (Release Radar, POLLEN, Discover Weekly) into a dataset that I would later run my trained model on.
 
