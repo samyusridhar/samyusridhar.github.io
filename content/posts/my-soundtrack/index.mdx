@@ -68,7 +68,7 @@ sp_auth = spotipy.Spotify (
 When I thought about what songs I wanted to use to train the model to predict songs that I would love, I immediately settled on the Spotify playlist that I have been adding to for years, containing the songs that evade categorization in my mind, the ones that make me feel the most like myself when I listen to them. I have no real logic for adding a song to this playlist, aptly titled "me", I just know when I hear it.
 
 <div class="spotify-container">
-<iframe src="https://open.spotify.com/embed/playlist/4lexbQSIJBWtJGQS3GQkUC" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+<iframe src="https://open.spotify.com/embed/playlist/4lexbQSIJBWtJGQS3GQkUC" width="900" height="150" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
 </div>
 
 I pulled back the metadata and audio features for the songs in this playlist as well as for my entire saved library. In order to do this, I wrote four separate functions:
@@ -110,8 +110,9 @@ I pulled back the metadata and audio features for the songs in this playlist as 
        return id_chunks
    ```
 4. Return audio features for a given list of IDs
-
-       def getTrackFeatures(ids):
+   
+   ```python
+   def getTrackFeatures(ids):
        meta = sp.tracks(ids)
        features = sp.audio_features(ids)
        tracks = []
@@ -149,7 +150,7 @@ I pulled back the metadata and audio features for the songs in this playlist as 
        return tracks
 
 Once these functions were written, the variables I defined earlier could be passed in as arguments to retrieve the data. Below is an example of the function in use, passing in my "favorites" playlist ID (train_playlist).
-
+    ```python
     ids = getTrackIDs(user_id, train_playlist)
     id_chunks = divide_chunks(ids, 50)
     
@@ -157,6 +158,7 @@ Once these functions were written, the variables I defined earlier could be pass
     for id_chunk in id_chunks:
         for track in getTrackFeatures(id_chunk):
             favorite_tracks.append(track)
+    ```
 
 Once I completed the audio feature retrieval for every track, I concatenated the two dataframes into a larger dataset and removed duplicates. I created a column titled "favorite", and placed 1's next to all of the tracks in my favorites playlist and 0's next to the rest. The total dataset consisted of close to 2,000 observations, with 90 of them being marked as "favorite". Below is a sample of the data:
 
