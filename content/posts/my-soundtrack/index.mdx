@@ -1,19 +1,35 @@
 ---
 title: My Soundtrack
 date: 2021-01-07
+description: "A recommendation model based on musical taste, built in Python."
 tags:
 - Music
 - Data Science
 ---
-I’ve always felt that music transcends words to construct a boundless language of its own, and it’s precisely because of this that I struggle to articulate what I love about a song. I tend to react quite instinctively and impulsively to a melody, and I’ve usually decided within the first listen whether or not it will be a favorite of mine. My favorite songs can bring me to emotional extremes, but I can’t always explain why. Is it the beat, or a chord progression, or the words or a random combination of each? Or is it something more intangible?
+I’ve always felt that music transcends words to construct a boundless language of its own, and it’s
+precisely because of this that I struggle to articulate what I love about a song. I tend to react
+quite instinctively and impulsively to a melody, and I’ve usually decided within the first listen
+whether or not it will be a favorite of mine. My favorite songs can bring me to emotional extremes,
+but I can’t always explain why. Is it the beat, or a chord progression, or the words or a random
+combination of each? Or is it something more intangible?
 
-As my relationship with music is extremely special to me, I could not think of a better segue into the world of predictive modeling than attempting to answer these questions. I am excited to follow my curiosity for culture and data into future projects like this one that can lead me to discover more about human interaction with the world around us.
+As my relationship with music is extremely special to me, I could not think of a better segue into
+the world of predictive modeling than attempting to answer these questions. I am excited to follow
+my curiosity for culture and data into future projects like this one that can lead me to discover
+more about human interaction with the world around us.
 
-I went through several revisions of how to add a predictive aspect to this project, given that I did not have access to my own streaming data or a quantifiable way to determine which songs were my favorites. I settled on using a curated playlist of mine that accurately represents my taste in music to compare audio features against those of my entire saved Spotify library.
+I went through several revisions of how to add a predictive aspect to this project, given that I did
+not have access to my own streaming data or a quantifiable way to determine which songs were my
+favorites. I settled on using a curated playlist of mine that accurately represents my taste in
+music to compare audio features against those of my entire saved Spotify library.
 
 ### Import Libraries
 
-I started by importing all the libraries I would use throughout the course of the project. I also set certain variables that I know I would be using repeatedly. In order to prevent my Client ID and Client Secret (created by starting a [Spotify Web App](https://developer.spotify.com/dashboard/login)) for being on display, I set environment variables and passed them here by importing the module **environ** from the library **os**.
+I started by importing all the libraries I would use throughout the course of the project. I also
+set certain variables that I know I would be using repeatedly. In order to prevent my Client ID and
+Client Secret (created by starting a [Spotify Web
+App](https://developer.spotify.com/dashboard/login)) for being on display, I set environment
+variables and passed them here by importing the module **environ** from the library **os**.
 
 1. Import Libraries
 
@@ -50,7 +66,11 @@ I started by importing all the libraries I would use throughout the course of th
 
 ### Spotify Web API
 
-I was able to obtain data for a given playlist using Spotify's Client Credential Flow, but since I was reading my user library data as well, I also needed to use the Authorization Code Flow, which grants access to user data based on the user's permission. Read more on Spotify's [Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/). Below is the process I followed to set up the Authorization code flow:
+I was able to obtain data for a given playlist using Spotify's Client Credential Flow, but since I
+was reading my user library data as well, I also needed to use the Authorization Code Flow, which
+grants access to user data based on the user's permission. Read more on Spotify's [Authorization
+Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/). Below is
+the process I followed to set up the Authorization code flow:
 
 ```python
 sp_auth = spotipy.Spotify (                                                                                                                                                   
@@ -65,13 +85,18 @@ sp_auth = spotipy.Spotify (
 
 ### Data Collection
 
-When I thought about what songs I wanted to use to train the model to predict songs that I would love, I immediately settled on the Spotify playlist that I have been adding to for years, containing the songs that evade categorization in my mind, the ones that make me feel the most like myself when I listen to them. I have no real logic for adding a song to this playlist, aptly titled "me", I just know when I hear it.
+When I thought about what songs I wanted to use to train the model to predict songs that I would
+love, I immediately settled on the Spotify playlist that I have been adding to for years, containing
+the songs that evade categorization in my mind, the ones that make me feel the most like myself when
+I listen to them. I have no real logic for adding a song to this playlist, aptly titled "me", I just
+know when I hear it.
 
 <div class="spotify-container">
 <iframe src="https://open.spotify.com/embed/playlist/4lexbQSIJBWtJGQS3GQkUC" width="950" height="300" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
 </div>
 
-I pulled back the metadata and audio features for the songs in this playlist as well as for my entire saved library. In order to do this, I wrote four separate functions:
+I pulled back the metadata and audio features for the songs in this playlist as well as for my
+entire saved library. In order to do this, I wrote four separate functions:
 
 1. Get a list of track IDs in a playlist (no authorization required)
 
@@ -150,15 +175,16 @@ I pulled back the metadata and audio features for the songs in this playlist as 
        return tracks
 
 Once these functions were written, the variables I defined earlier could be passed in as arguments to retrieve the data. Below is an example of the function in use, passing in my "favorites" playlist ID (train_playlist).
-    ```python
-    ids = getTrackIDs(user_id, train_playlist)
-    id_chunks = divide_chunks(ids, 50)
-    
-    favorite_tracks = []
-    for id_chunk in id_chunks:
-        for track in getTrackFeatures(id_chunk):
-            favorite_tracks.append(track)
-    ```
+
+```python
+ids = getTrackIDs(user_id, train_playlist)
+id_chunks = divide_chunks(ids, 50)
+
+favorite_tracks = []
+for id_chunk in id_chunks:
+    for track in getTrackFeatures(id_chunk):
+        favorite_tracks.append(track)
+```
 
 Once I completed the audio feature retrieval for every track, I concatenated the two dataframes into a larger dataset and removed duplicates. I created a column titled "favorite", and placed 1's next to all of the tracks in my favorites playlist and 0's next to the rest. The total dataset consisted of close to 2,000 observations, with 90 of them being marked as "favorite". Below is a sample of the data:
 

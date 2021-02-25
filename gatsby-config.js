@@ -6,7 +6,12 @@ const shouldAnalyseBundle = process.env.ANALYSE_BUNDLE
 
 module.exports = {
   siteMetadata: {
-    siteTitleAlt: `Minimal Blog - Gatsby Theme`,
+    siteTitle: `Samyuktha Sridhar`,
+    author: `samyu.747@gmail.com`,
+    siteDescription: `Personal Website`,
+    siteLanguage: `en`,
+    siteTitleAlt: `Samyuktha Sridhar`,
+    siteImage: `./banner.jpeg`,
   },
   plugins: [
     {
@@ -15,24 +20,25 @@ module.exports = {
       options: {
         navigation: [
           {
-            title: `About`,
-            slug: `/about`,
-          },
-          {
             title: `Blog`,
             slug: `/blog`,
+          },
+          {
+            title: `Projects`,
+            slug: `/projects`,
           },
         ],
         externalLinks: [
           {
-            name: `Twitter`,
-            url: `https://twitter.com/lekoarts_de`,
+            name: `About`,
+            url: `/about`,
           },
           {
-            name: `Instagram`,
-            url: `https://www.instagram.com/lekoarts.de/`,
+            name: `Resume`,
+            url: `./resume.pdf`,
           },
         ],
+        formatString: `M.DD.YYYY`,
       },
     },
     {
@@ -50,7 +56,7 @@ module.exports = {
         description: `Typography driven, feature-rich blogging theme with minimal aesthetics. Includes tags/categories support and extensive features for code blocks such as live preview, line numbers, and code highlighting.`,
         start_url: `/`,
         background_color: `#fff`,
-        theme_color: `#6B46C1`,
+        theme_color: `#F6002E`,
         display: `standalone`,
         icons: [
           {
