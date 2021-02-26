@@ -188,7 +188,7 @@ for id_chunk in id_chunks:
 
 Once I completed the audio feature retrieval for every track, I concatenated the two dataframes into a larger dataset and removed duplicates. I created a column titled "favorite", and placed 1's next to all of the tracks in my favorites playlist and 0's next to the rest. The total dataset consisted of close to 2,000 observations, with 90 of them being marked as "favorite". Below is a sample of the data:
 
-<img src="./images/my-soundtrack_favorite-dataframe.png" alt="Favorites Dataframe" width="100%"/>
+<img src="./images/my-soundtrack_favorites-dataframe.png" alt="Favorites Dataframe" width="100%"/>
 
 I repeated the process for the "test" data by concatenating the audio features for three separate playlists (Release Radar, POLLEN, Discover Weekly) into a dataset that I would later run my trained model on.
 
@@ -211,7 +211,7 @@ Once I had the data in a tidy format, I was able to inspect it more closely. The
 
 I first compared the means of two subsets (favorite and non-favorite tracks) of my dataframe using an independent sample t-test, and found there to be a significant difference in means (at the 0.05 alpha level) for **mode**, **danceability**, and **speechiness**, indicating that these three features could be strong signals for identifying a favorite track.
 
-<img src="./images/my-soundtrack_t-test.png" alt="T-test" width="100%"/>
+![T-test](./images/my-soundtrack_t-test.png)
 
 From the scatterplot grid (built using the pairplot function from the python library [Seaborn](https://seaborn.pydata.org/)) of all the continuous variable audio features below, it can be seen that my favorite tracks are more likely to be higher in tempo and lower in danceability score than the rest of my saved tracks.
 
@@ -260,7 +260,7 @@ I then determined the optimal k by running the model through a range of k values
     plt.ylabel("Misclassification Error")
     plt.show()
 
-<img src="./images/my-soundtrack_optimal-k" alt="Optimal K" width="100%"/>
+![Optimal K](./images/my-soundtrack_optimal-k.png)
 
 Finally I ran the model with the optimal k neighbors and predicted the probabilities for the classification (non-favorite and favorite) of each data point in the audio_features_test set.
 This model scored **96%**.
@@ -291,7 +291,7 @@ To begin, I viewed the feature importances of all the audio features to see if t
     #Feature Importance
     feature_imp = pd.Series(rf.feature_importances_,index=features.columns).sort_values(ascending=False)
 
-<img src="./images/my-soundtrack_feature-importance.png" alt="Feature Importance" width="100%"/>
+![Feature Importance](./images/my-soundtrack_feature-importance.png)
 
 I then proceeded to choose 3 subsets of the data based on my own estimation of most influential features, feature importance as stated by the model, weak correlation, and statistically significant differences between favorite and non-favorite populations.
 
