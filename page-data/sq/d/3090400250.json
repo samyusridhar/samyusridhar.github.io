@@ -1,0 +1,1 @@
+{"data":{"minimalBlogConfig":{"basePath":"/","blogPath":"/blog","postsPath":"content/posts","pagesPath":"content/pages","tagsPath":"/tags","externalLinks":[{"name":"About","url":"/about"},{"name":"Resume","url":"./resume.pdf"}],"navigation":[{"title":"Blog","slug":"/blog"},{"title":"Projects","slug":"/projects"}],"showLineNumbers":true,"showCopyButton":true}}}
