@@ -11,8 +11,17 @@ import { visuallyHidden } from "@lekoarts/gatsby-theme-minimal-blog/src/styles/u
 // @ts-ignore
 import Hero from "../texts/hero"
 import React from 'react'
-import BackgroundSlider from 'gatsby-image-background-slider'
 import { useStaticQuery, graphql } from "gatsby"
+
+import Slider from "react-slick"
+import "slick-carousel/slick/slick.css"
+import "slick-carousel/slick/slick-theme.css"
+
+const settings = {
+  dots: false,
+  infinite: true,
+  autoplay: true,
+}
 
 type PostsProps = {
   posts: {
@@ -39,23 +48,30 @@ const Homepage = ({ posts }: PostsProps) => {
       <h1 sx={visuallyHidden}>{siteTitle}</h1>
       <section sx={{ mb: [3, 4, 5], p: { fontSize: [1, 2, 3], mt: 2 }, variant: `section_hero` }}>
         <Hero />
-        <BackgroundSlider 
-          query={useStaticQuery(graphql`
-            query {
-              backgrounds: allFile (filter: {sourceInstanceName: {eq: "backgrounds"}}){
-                nodes {
-                  relativePath
-                  childImageSharp {
-                    fluid (maxWidth: 4000, quality: 100){
-                      ...GatsbyImageSharpFluid
-                    }
-                  }
+      </section> 
+      <section>
+        <Slider {...settings} className="overflow-hidden" query={useStaticQuery(graphql`
+          query {
+            image1: file(relativePath: { eq: "my-image-1-path.jpg" }) {
+              childImageSharp {
+                fluid {
+                  ...GatsbyImageSharpFluid
                 }
               }
             }
-          `)}
-        />
-      </section> 
+            image2: file(relativePath: { eq: "my-image-2-path.jpg" }) {
+              childImageSharp {
+                fluid {
+                  ...GatsbyImageSharpFluid
+                }
+              }
+            }
+          }
+        `)}>
+          <Img fluid={data.image1.childImageSharp.fluid} />
+          <Img fluid={data.image2.childImageSharp.fluid} />
+        </Slider>
+      </section>
       <Title text="Latest Posts">
         <Link to={replaceSlashes(`/${basePath}/${blogPath}`)}>Read all posts</Link>
       </Title>
