@@ -52,14 +52,14 @@ const Homepage = ({ posts }: PostsProps) => {
       <section>
         <Slider {...settings} className="overflow-hidden" query={useStaticQuery(graphql`
           query {
-            image1: file(relativePath: { eq: "my-image-1-path.jpg" }) {
+            image1: file(relativePath: { eq: "static/images/menton_france/0002_1.jpg" }) {
               childImageSharp {
                 fluid {
                   ...GatsbyImageSharpFluid
                 }
               }
             }
-            image2: file(relativePath: { eq: "my-image-2-path.jpg" }) {
+            image2: file(relativePath: { eq: "static/images/menton_france/0003_1.jpg" }) {
               childImageSharp {
                 fluid {
                   ...GatsbyImageSharpFluid
