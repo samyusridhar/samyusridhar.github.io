@@ -69,8 +69,6 @@ const Homepage = ({ posts }: PostsProps) => {
             }
           }
         `)}>
-          <Img fluid={data.image1.childImageSharp.fluid} />
-          <Img fluid={data.image2.childImageSharp.fluid} />
         </Slider>
       </section>
       <Title text="Latest Posts">
