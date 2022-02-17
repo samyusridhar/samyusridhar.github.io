@@ -12,6 +12,7 @@ import { visuallyHidden } from "@lekoarts/gatsby-theme-minimal-blog/src/styles/u
 import Hero from "../texts/hero"
 import React from 'react'
 import BackgroundSlider from 'gatsby-image-background-slider'
+import { useStaticQuery, graphql } from "gatsby"
 
 type PostsProps = {
   posts: {
