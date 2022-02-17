@@ -10,6 +10,8 @@ import replaceSlashes from "@lekoarts/gatsby-theme-minimal-blog/src/utils/replac
 import { visuallyHidden } from "@lekoarts/gatsby-theme-minimal-blog/src/styles/utils"
 // @ts-ignore
 import Hero from "../texts/hero"
+import React from 'react'
+import BackgroundSlider from 'gatsby-image-background-slider'
 
 type PostsProps = {
   posts: {
@@ -36,6 +38,22 @@ const Homepage = ({ posts }: PostsProps) => {
       <h1 sx={visuallyHidden}>{siteTitle}</h1>
       <section sx={{ mb: [3, 4, 5], p: { fontSize: [1, 2, 3], mt: 2 }, variant: `section_hero` }}>
         <Hero />
+        <BackgroundSlider 
+          query={useStaticQuery(graphql`
+            query {
+              backgrounds: allFile (filter: {sourceInstanceName: {eq: "backgrounds"}}){
+                nodes {
+                  relativePath
+                  childImageSharp {
+                    fluid (maxWidth: 4000, quality: 100){
+                      ...GatsbyImageSharpFluid
+                    }
+                  }
+                }
+              }
+            }
+          `)}
+        />
       </section> 
       <Title text="Latest Posts">
         <Link to={replaceSlashes(`/${basePath}/${blogPath}`)}>Read all posts</Link>
