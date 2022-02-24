@@ -10,19 +10,6 @@ import replaceSlashes from "@lekoarts/gatsby-theme-minimal-blog/src/utils/replac
 import { visuallyHidden } from "@lekoarts/gatsby-theme-minimal-blog/src/styles/utils"
 // @ts-ignore
 import Hero from "../texts/hero"
-import React from 'react'
-import { useStaticQuery, graphql } from "gatsby"
-
-import Slider from "react-slick"
-import "slick-carousel/slick/slick.css"
-import "slick-carousel/slick/slick-theme.css"
-import Img from "gatsby-image"
-
-const settings = {
-  dots: false,
-  infinite: true,
-  autoplay: true,
-}
 
 type PostsProps = {
   posts: {
@@ -49,27 +36,6 @@ const Homepage = ({ posts }: PostsProps) => {
       <h1 sx={visuallyHidden}>{siteTitle}</h1>
       <section sx={{ mb: [3, 4, 5], p: { fontSize: [1, 2, 3], mt: 2 }, variant: `section_hero` }}>
         <Hero />
-      </section> 
-      <section>
-        <Slider {...settings} className="overflow-hidden" query={useStaticQuery(graphql`
-          query {
-            image1: file(relativePath: { eq: "static/images/menton_france/0002_1.jpg" }) {
-              childImageSharp {
-                fluid {
-                  ...GatsbyImageSharpFluid
-                }
-              }
-            }
-            image2: file(relativePath: { eq: "static/images/menton_france/0003_1.jpg" }) {
-              childImageSharp {
-                fluid {
-                  ...GatsbyImageSharpFluid
-                }
-              }
-            }
-          }
-        `)}>
-        </Slider>
       </section>
       <Title text="Latest Posts">
         <Link to={replaceSlashes(`/${basePath}/${blogPath}`)}>Read all posts</Link>

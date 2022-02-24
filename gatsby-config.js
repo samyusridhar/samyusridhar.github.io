@@ -27,6 +27,10 @@ module.exports = {
             title: `Projects`,
             slug: `/projects`,
           },
+          {
+            title: `Photography`,
+            slug: `/photography`,
+          },
         ],
         externalLinks: [
           {
@@ -44,8 +48,8 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `backgrounds`,
-        path: `${__dirname}/static/images/menton_france`,
+        name: `images`,
+        path: `${__dirname}/static/images`,
       },
     },
     {
