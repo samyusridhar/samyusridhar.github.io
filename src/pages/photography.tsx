@@ -1,6 +1,5 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui"
-import baseTheme from '@lekoarts/gatsby-theme-minimal-blog/src/gatsby-plugin-theme-ui'
 import Layout from "@lekoarts/gatsby-theme-minimal-blog/src/components/layout"
 import { useStaticQuery, graphql } from "gatsby"
 import Slider from "react-slick"
@@ -11,13 +10,13 @@ import "slick-carousel/slick/slick-theme.css"
 
 const sliderStyle = {
   ".slick-prev:before, .slick-next:before": {
-    color: `heading`
+    color: `heading`,
   }
 }
 
-const headerStyle = {
-    ...baseTheme.styles.h1,
-    fontStyle: `italic`,
+const albumNameStyle = {
+  "text-align": 'center',
+  color: `heading`,
 }
 
 const Photography = () => {
@@ -55,7 +54,7 @@ const Photography = () => {
 
   return (
     <Layout>      
-      <h1 sx={{ ...headerStyle }}>Film Photography</h1>
+      <h2 sx={{ ...albumNameStyle }}>Menton, France</h2>
       <section>
         <Slider sx={{ ...sliderStyle }}>
           {data.mentonFrance.nodes.map((item, index) => {
@@ -63,6 +62,7 @@ const Photography = () => {
           })}
         </Slider>
       </section>
+      <h2 sx={{ ...albumNameStyle }}>Yellowstone National Park</h2>
       <section>
         <Slider sx={{ ...sliderStyle }}>
           {data.yellowstone.nodes.map((item, index) => {
@@ -70,6 +70,7 @@ const Photography = () => {
           })}
         </Slider>
       </section>
+      <h2 sx={{ ...albumNameStyle }}>People</h2>
       <section>
         <Slider sx={{ ...sliderStyle }}>
           {data.people.nodes.map((item, index) => {
