@@ -8,10 +8,16 @@ import Img from "gatsby-image"
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 
-const sliderStyle = {
-  ".slick-prev:before, .slick-next:before": {
-    color: `heading`,
-  }
+const sliderProps = {
+  dots: true,
+  sx: {
+    ".slick-prev:before, .slick-next:before": {
+      color: `heading`,
+    },
+    ".slick-dots li button::before": {
+      color: `heading`,
+    },
+  },
 }
 
 const albumNameStyle = {
@@ -56,23 +62,25 @@ const Photography = () => {
     <Layout>      
       <h2 sx={{ ...albumNameStyle }}>Menton, France</h2>
       <section>
-        <Slider sx={{ ...sliderStyle }}>
+        <Slider { ...sliderProps }>
           {data.mentonFrance.nodes.map((item, index) => {
             return <Img fluid={item.childImageSharp.fluid} />
           })}
         </Slider>
       </section>
+      <br/>
       <h2 sx={{ ...albumNameStyle }}>Yellowstone National Park</h2>
       <section>
-        <Slider sx={{ ...sliderStyle }}>
+        <Slider { ...sliderProps }>
           {data.yellowstone.nodes.map((item, index) => {
             return <Img fluid={item.childImageSharp.fluid} />
           })}
         </Slider>
       </section>
+      <br/>
       <h2 sx={{ ...albumNameStyle }}>People</h2>
       <section>
-        <Slider sx={{ ...sliderStyle }}>
+        <Slider { ...sliderProps }>
           {data.people.nodes.map((item, index) => {
             return <Img fluid={item.childImageSharp.fluid} />
           })}
