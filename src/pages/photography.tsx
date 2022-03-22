@@ -28,6 +28,15 @@ const albumNameStyle = {
 const Photography = () => {
   const data = useStaticQuery(graphql`
     {
+      india2021: allFile(filter: {relativeDirectory: {eq: "india_2021"}}) {
+        nodes {
+          childImageSharp {
+            fluid {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
+      }
       mentonFrance: allFile(filter: {relativeDirectory: {eq: "menton_france"}}) {
         nodes {
           childImageSharp {
@@ -38,6 +47,15 @@ const Photography = () => {
         }
       }
       yellowstone: allFile(filter: {relativeDirectory: {eq: "yellowstone"}}) {
+        nodes {
+          childImageSharp {
+            fluid {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
+      }
+      newYorkCity: allFile(filter: {relativeDirectory: {eq: "nyc"}}) {
         nodes {
           childImageSharp {
             fluid {
@@ -60,6 +78,15 @@ const Photography = () => {
 
   return (
     <Layout>      
+      <h2 sx={{ ...albumNameStyle }}>Tamil Nadu &amp; Karnataka, India</h2>
+      <section>
+        <Slider { ...sliderProps }>
+          {data.india2021.nodes.map((item, index) => {
+            return <Img fluid={item.childImageSharp.fluid} />
+          })}
+        </Slider>
+      </section>
+      <br/>
       <h2 sx={{ ...albumNameStyle }}>Menton, France</h2>
       <section>
         <Slider { ...sliderProps }>
@@ -73,6 +100,15 @@ const Photography = () => {
       <section>
         <Slider { ...sliderProps }>
           {data.yellowstone.nodes.map((item, index) => {
+            return <Img fluid={item.childImageSharp.fluid} />
+          })}
+        </Slider>
+      </section>
+      <br/>
+      <h2 sx={{ ...albumNameStyle }}>New York City, USA</h2>
+      <section>
+        <Slider { ...sliderProps }>
+          {data.newYorkCity.nodes.map((item, index) => {
             return <Img fluid={item.childImageSharp.fluid} />
           })}
         </Slider>
